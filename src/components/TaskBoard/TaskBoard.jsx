@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TaskCard from "../TaskCard/TaskCard";
+import TaskModal from "../TaskCard/TaskModal";
 
 const TaskBoard = ({ tasks, handleUpdateTask }) => {
   const [taskState, setTaskState] = useState({});
+  const [selectedTask, setSelectedTask] = useState(null); // State for selected task
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   // Sync taskState with tasks prop
   useEffect(() => {
@@ -44,23 +47,39 @@ const TaskBoard = ({ tasks, handleUpdateTask }) => {
     }
   };
 
+  const openModal = (task) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedTask(null);
+    setIsModalOpen(false);
+  };
+
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {Object.entries(taskState).map(([status, tasksList], index) => (
-          <Column
-            key={index}
-            title={status}
-            tasks={tasksList}
-            handleUpdateTask={handleUpdateTask}
-          />
-        ))}
-      </div>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {Object.entries(taskState).map(([status, tasksList], index) => (
+            <Column
+              key={index}
+              title={status}
+              tasks={tasksList}
+              handleUpdateTask={handleUpdateTask}
+              openModal={openModal}
+            />
+          ))}
+        </div>
+      </DragDropContext>
+      {isModalOpen && selectedTask && (
+        <TaskModal task={selectedTask} onClose={closeModal} />
+      )}
+    </>
   );
 };
 
-const Column = ({ title, tasks, handleUpdateTask }) => (
+const Column = ({ title, tasks, handleUpdateTask, openModal }) => (
   <Droppable droppableId={title}>
     {(provided) => (
       <div
@@ -78,6 +97,7 @@ const Column = ({ title, tasks, handleUpdateTask }) => (
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
+                    onClick={() => openModal(task)} // Open modal on click
                   >
                     <TaskCard handleUpdateTask={handleUpdateTask} {...task} />
                   </div>

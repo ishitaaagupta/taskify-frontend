@@ -1,6 +1,5 @@
 const userSignup = async({email,password,name})=>{
     try {
-        console.log(email,password,name)
         const response = await fetch(`http://localhost:3000/api/v1/users/signup`, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
@@ -10,7 +9,6 @@ const userSignup = async({email,password,name})=>{
           });
 
           const jsondata = await response.json()
-
           console.log(jsondata)
           return jsondata
         
@@ -23,7 +21,6 @@ const userSignup = async({email,password,name})=>{
 
 const userLogin = async({email,password})=>{
   try {
-      console.log(email,password)
       const response = await fetch(`http://localhost:3000/api/v1/users/login`, {
           method: "POST",
           headers: {
@@ -32,7 +29,6 @@ const userLogin = async({email,password})=>{
           body:JSON.stringify({email:email,password:password}),
         });
         const jsondata = await response.json()
-        console.log(jsondata)
         return jsondata
   } catch (error) {
     console.log("error logging in ",error)
@@ -52,7 +48,6 @@ const userLogout = async () => {
       
       if (response.ok) {
         const jsondata =await response.json()
-        console.log("Logout successful");
         localStorage.removeItem("token")
         localStorage.removeItem("myState")
         return jsondata

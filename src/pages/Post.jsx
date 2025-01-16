@@ -24,9 +24,7 @@ export default function Post() {
 
     const handleSaveTask = (newTask) => {
 
-        // console.log(newTask)
         addTask({...newTask,project:slug}).then((data)=>{
-            // console.log(data)
             if(data.success){
                 setForcedUpdate((prev)=>!prev)
             }
@@ -35,7 +33,6 @@ export default function Post() {
             }
             
         }).catch((err)=>{
-            // console.log(err)
             setError(err)
         })
 
@@ -43,7 +40,6 @@ export default function Post() {
 
     const handleUpdateTask = async(taskId)=>{
         updateTask(taskId).then((data)=>{
-            // console.log(data)
             if(data.success){
                 setForcedUpdate((prev)=>!prev)
             }
@@ -62,7 +58,6 @@ export default function Post() {
 
         getProjectById(slug)
         .then((data)=>{
-            // console.log(data)
             setProject(data?.data)
             const taskObj = {
                 Backlog : data?.data?.taskList.filter((task)=>(task.taskStatus === "Backlog")),
@@ -70,7 +65,6 @@ export default function Post() {
                 InProgress : data?.data?.taskList.filter((task)=>(task.taskStatus ==="In Progress")),
                 Done : data?.data?.taskList.filter((task)=>(task.taskStatus ==="Done"))
             }
-            // console.log(taskObj)
             setTasks(taskObj)
         })
         .catch((error)=>{console.log(error)})
@@ -81,7 +75,6 @@ export default function Post() {
     const deletePost = () => {
         if(slug){
             deleteProjectById(slug).then((data)=>{
-                // console.log(data)
                 if(data?.success){
                     navigate('/')
                 }

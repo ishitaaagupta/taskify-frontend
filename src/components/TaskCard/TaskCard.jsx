@@ -11,7 +11,6 @@ const TaskCard = ({
   assignedTo,
   project,
 }) => {
-  console.log(`Task Status: ${taskStatus}`); // Log the taskStatus for debugging
 
   return (
     <div
@@ -50,7 +49,6 @@ const TaskCard = ({
 };
 
 const getStatusColor = (status) => {
-  console.log(`Checking color for status: "${status}"`); // Debugging
   switch (status.trim()) { // Ensure spaces are trimmed
     case "Backlog":
       return "bg-pink-100";

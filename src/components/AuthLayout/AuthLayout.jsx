@@ -13,7 +13,6 @@ const Protected = ({children,authentication = "true"}) => {
  
     useEffect(()=>{
       if(authentication && authentication!== authStatus){
-        // console.log("here")
         navigate("/login")
     }
     else if(!authentication && authentication !== authStatus){

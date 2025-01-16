@@ -13,7 +13,6 @@ function EditPost() {
 
             getProjectById(slug)
             .then((data)=>{
-                // console.log(data)
                 setProject(data?.data)
             })
             .catch((error)=>{console.log(error)})

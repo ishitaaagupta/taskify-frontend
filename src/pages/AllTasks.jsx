@@ -17,14 +17,12 @@ const AllTasks = () => {
 
     useEffect(()=>{
         getAllTasks().then((data)=>{
-            // console.log(data)
             const taskObj = {
                 Backlog : data?.data?.filter((task)=>(task.taskStatus === "Backlog")),
                 InDiscussion : data?.data?.filter((task)=>(task.taskStatus ==="In Discussion")),
                 InProgress : data?.data?.filter((task)=>(task.taskStatus ==="In Progress")),
                 Done : data?.data?.filter((task)=>(task.taskStatus ==="Done"))
             }
-            // console.log(taskObj)
             setTasks(taskObj)
         }).catch((error)=>{console.log(error)})
     },[forcedUpdate])
