@@ -40,7 +40,8 @@ const PostForm = ({ project }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(formSubmitHandler, validationErrorHandler)} className='p-6 bg-purple-100 rounded-lg shadow-lg'>
+        <form onSubmit={handleSubmit(formSubmitHandler, validationErrorHandler)} className='p-6 bg-purple-100 rounded-lg shadow-lg'
+        style={{ width: '50%', margin: '50px auto' }}>
             <div className='mb-4'>
                 {error?.errmessage && <p className="text-purple-600 text-center">{error.errmessage}</p>}
             </div>
