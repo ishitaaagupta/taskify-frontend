@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { updateTask } from "../../apirequests/tasks";
 
 const TaskCard = ({
   _id,
@@ -12,6 +13,9 @@ const TaskCard = ({
   project,
 }) => {
 
+useEffect(() => {
+  updateTask(_id,taskStatus);
+}, [taskStatus]);
   return (
     <div
       className={`shadow-md rounded-md p-4 mb-4 hover:scale-105 duration-200 hover:cursor-pointer ${getStatusColor(

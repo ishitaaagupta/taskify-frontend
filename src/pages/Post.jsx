@@ -59,13 +59,7 @@ export default function Post() {
         getProjectById(slug)
         .then((data)=>{
             setProject(data?.data)
-            const taskObj = {
-                Backlog : data?.data?.taskList.filter((task)=>(task.taskStatus === "Backlog")),
-                InDiscussion : data?.data?.taskList.filter((task)=>(task.taskStatus ==="In Discussion")),
-                InProgress : data?.data?.taskList.filter((task)=>(task.taskStatus ==="In Progress")),
-                Done : data?.data?.taskList.filter((task)=>(task.taskStatus ==="Done"))
-            }
-            setTasks(taskObj)
+            setTasks(data?.data?.taskList)
         })
         .catch((error)=>{console.log(error)})
 

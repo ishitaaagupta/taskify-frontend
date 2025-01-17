@@ -5,11 +5,10 @@ import { updateTask } from '../apirequests/tasks'
 
 const AllTasks = () => {
 
-    const [tasks,setTasks]= useState({})
+    const [tasks,setTasks]= useState([])
     const [forcedUpdate,setForcedUpdate]= useState(false)
     const handleUpdateTask = async(taskId)=>{
         updateTask(taskId).then((data)=>{
-            console.log(data)
                 setForcedUpdate((prev)=>!prev)
             
         }).catch((error)=>{console.log(error)})
@@ -17,13 +16,7 @@ const AllTasks = () => {
 
     useEffect(()=>{
         getAllTasks().then((data)=>{
-            const taskObj = {
-                Backlog : data?.data?.filter((task)=>(task.taskStatus === "Backlog")),
-                InDiscussion : data?.data?.filter((task)=>(task.taskStatus ==="In Discussion")),
-                InProgress : data?.data?.filter((task)=>(task.taskStatus ==="In Progress")),
-                Done : data?.data?.filter((task)=>(task.taskStatus ==="Done"))
-            }
-            setTasks(taskObj)
+          setTasks(data)
         }).catch((error)=>{console.log(error)})
     },[forcedUpdate])
 

@@ -20,7 +20,8 @@ const addTask = async({taskName,taskDescription,dueDate,project,tags,assignedTo}
     }
 }
 
-const updateTask = async(taskId)=>{
+const updateTask = async(taskId,taskStatus)=>{
+if(taskStatus){
     try {
         let token = localStorage.getItem('token')
         const response = await fetch(`http://localhost:3000/api/v1/tasks/${taskId}`, {
@@ -30,6 +31,7 @@ const updateTask = async(taskId)=>{
           "Authorization":`Bearer ${token}`
 
             },
+            body:JSON.stringify({taskStatus}),
           });
           const jsondata = await response.json()
           console.log(jsondata)
@@ -37,6 +39,7 @@ const updateTask = async(taskId)=>{
     } catch (error) {
       console.log("error adding project ",error)
     }
+  }
 }
 
 const getAllTasks = async()=>{
@@ -51,8 +54,8 @@ const getAllTasks = async()=>{
             },
           });
           const jsondata = await response.json()
-          console.log(jsondata)
-          return jsondata
+    
+          return jsondata?.data
     } catch (error) {
       console.log("error adding project ",error)
     }
