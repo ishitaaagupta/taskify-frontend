@@ -131,19 +131,9 @@ const Column = ({ title, tasks, handleUpdateTask, openModal }) => (
   </Droppable>
 );
 
-const getColumnColor = (title) => {
-  switch (title) {
-    case "Backlog":
-      return "bg-orange-100";
-    case "InDiscussion":
-      return "bg-yellow-100";
-    case "InProgress":
-      return "bg-blue-100";
-    case "Done":
-      return "bg-green-100";
-    default:
-      return "bg-gray-100";
+const getColumnColor = () => {
+  return "bg-pink-100";
   }
-};
+
 
 export default TaskBoard;

@@ -27,7 +27,6 @@ const Login = () => {
         localStorage.setItem("token", userData?.data?.accessToken);
         localStorage.setItem("myState", JSON.stringify(userData.data.user));
         navigate("/");
-        toast.success("Login successful!");
       } else {
         throw userData;
       }

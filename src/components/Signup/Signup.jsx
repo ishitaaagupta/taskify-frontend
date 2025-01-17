@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo, Button, Input } from "../index";
 import { useForm } from "react-hook-form";
@@ -10,17 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { register, handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
-
   const formSubmitHandler = async (data) => {
     setError(null);
     try {
       const response = await userSignup(data);
       console.log(response);
       if (response.success) {
-        toast.success("Account created successfully! Redirecting to login...");
         navigate("/login");
       } else {
         throw response;
